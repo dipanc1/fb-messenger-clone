@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { UserEntity } from './user.entity';
-import { dataSourceOptions } from './db/data-source';
+
+import { PostgresDBModule } from '@app/shared/postgresdb.module';
+import { SharedModule } from '@app/shared';
 
 @Module({
   imports: [
@@ -13,22 +17,8 @@ import { dataSourceOptions } from './db/data-source';
       envFilePath: './.env',
     }),
 
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      // useFactory: (configService: ConfigService) => ({
-      //   type: 'postgres',
-      //   url: configService.get('POSTGRES_URI'),
-      //   autoLoadEntities: true,
-      //   synchronize: true, // do not use this in production
-      // }),
-
-      useFactory: () => ({
-        ...dataSourceOptions,
-        autoLoadEntities: true,
-        synchronize: true, // do not use this in production
-      }),
-      inject: [ConfigService],
-    }),
+    SharedModule,
+    PostgresDBModule,
 
     TypeOrmModule.forFeature([UserEntity]),
   ],

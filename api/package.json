@@ -22,9 +22,9 @@
     "build:auth": "nest build auth",
     "build": "npm run build:api && npm run build:auth",
     "typeorm": "npx typeorm -d ./dist/apps/auth/db/data-source.js",
-    "generate:migration":"npm run typeorm -- migration:generate",
-    "run:migration":"npm run typeorm -- migration:run",
-    "revert:migration":"npm run typeorm -- migration:revert"
+    "generate:migration": "npm run typeorm -- migration:generate",
+    "run:migration": "npm run typeorm -- migration:run",
+    "revert:migration": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
