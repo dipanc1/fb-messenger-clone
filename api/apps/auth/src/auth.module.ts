@@ -7,8 +7,7 @@ import { AuthService } from './auth.service';
 
 import { UserEntity } from './user.entity';
 
-import { PostgresDBModule } from '@app/shared/postgresdb.module';
-import { SharedModule } from '@app/shared';
+import { SharedModule, PostgresDBModule } from '@app/shared';
 
 @Module({
   imports: [
